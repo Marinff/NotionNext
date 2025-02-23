@@ -1,10 +1,9 @@
-import SideBarDrawer from '@/components/SideBarDrawer'
-import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import throttle from 'lodash.throttle'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 import CategoryGroup from './CategoryGroup'
 import Logo from './Logo'
@@ -12,6 +11,7 @@ import { MenuListTop } from './MenuListTop'
 import SearchButton from './SearchButton'
 import SearchDrawer from './SearchDrawer'
 import SideBar from './SideBar'
+import SideBarDrawer from '@/components/SideBarDrawer'
 import TagGroups from './TagGroups'
 
 let windowTop = 0
@@ -39,20 +39,17 @@ const Header = props => {
         const showNav =
           scrollS <= windowTop ||
           scrollS < 5 ||
-          (header && scrollS <= header.clientHeight * 2) // 非首页无大图时影藏顶部 滚动条置顶时隐藏// 非首页无大图时影藏顶部 滚动条置顶时隐藏
+          (header && scrollS <= header.clientHeight * 2)
+
         // 是否将导航栏透明
-        const navTransparent = header && scrollS < 300 // 透明导航条的条件
+        const navTransparent = scrollS < 300 // 透明导航条的条件
 
         if (navTransparent) {
-          nav && nav.classList.replace('bg-indigo-700', 'bg-white')  // 修改背景色为白色
-          nav && nav.classList.replace('text-black', 'text-gray-800')  // 修改字体颜色为黑色
-          nav && nav.classList.replace('shadow-xl', 'shadow-none')
-          nav && nav.classList.replace('dark:bg-hexo-black-gray', 'transparent')
+          nav?.classList.replace('bg-white', 'bg-none') // 变透明
+          nav?.classList.replace('text-black', 'text-white') // 文字变白
         } else {
-          nav && nav.classList.replace('bg-none', 'bg-white')  // 修改背景色为白色
-          nav && nav.classList.replace('text-gray-800', 'text-black')  // 修改字体颜色为黑色
-          nav && nav.classList.replace('shadow-none', 'shadow-xl')
-          nav && nav.classList.replace('transparent', 'dark:bg-hexo-black-gray')
+          nav?.classList.replace('bg-none', 'bg-white') // 变回白色
+          nav?.classList.replace('text-white', 'text-black') // 文字变黑
         }
 
         if (!showNav) {
@@ -151,7 +148,7 @@ const Header = props => {
       <div
         id='sticky-nav'
         className={
-          'flex justify-center top-0 shadow-none fixed bg-none dark:bg-hexo-black-gray text-gray-200 w-full z-30 transform transition-all duration-200'
+          'flex justify-center top-0 shadow-none fixed bg-none text-gray-200 w-full z-30 transform transition-all duration-200'
         }>
         <div className='w-full max-w-6xl flex justify-between items-center px-4 py-2'>
           {/* 左侧功能 */}
