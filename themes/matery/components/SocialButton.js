@@ -13,8 +13,7 @@ const SocialButton = () => {
   }
 
   return (
-    <div className='flex flex-col transform hover:scale-105 duration-200 text-black text-center bg-white rounded-full dark:bg-black cursor-pointer py-2.5'>
-      {!show && (
+    <div className='flex flex-col transform hover:scale-105 duration-200 text-white text-center bg-indigo-700 rounded-full dark:bg-black cursor-pointer py-2.5'>
         <i
           onClick={toggleShow}
           className='transform hover:scale-125 duration-150 fas fa-user py-0.5'
