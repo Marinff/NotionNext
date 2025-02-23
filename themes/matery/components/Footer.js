@@ -15,16 +15,16 @@ const Footer = ({ title }) => {
   })()
 
   return (
-    <footer className='relative z-10 dark:bg-black flex-shrink-0 white black justify-center text-center m-auto w-full leading-6  dark:text-gray-100 text-sm p-6'>
+    <footer className='relative z-10 dark:bg-black flex-shrink-0 bg-white text-gray-800 justify-center text-center m-auto w-full leading-6 dark:text-gray-100 text-sm p-6'>
       {/* <DarkModeButton/> */}
       <i className='fas fa-copyright' /> {`${copyrightDate}`}{' '}
       <span>
         <span className='w-5 mx-1 text-center'>
-          <i className=' animate-pulse fas fa-heart' />
+          <i className='animate-pulse fas fa-heart' />
         </span>{' '}
         <a
           href={siteConfig('LINK')}
-          className='underline font-bold  dark:text-gray-300 '>
+          className='underline font-bold dark:text-gray-300'>
           {siteConfig('AUTHOR')}
         </a>
         .<br />
@@ -48,7 +48,7 @@ const Footer = ({ title }) => {
         </span>
         <br />
         <h1>{title}</h1>
-        <span className='text-xs '>
+        <span className='text-xs'>
           Powered by{' '}
           <a
             href='https://github.com/tangly1024/NotionNext'
