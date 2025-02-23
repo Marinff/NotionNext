@@ -28,7 +28,7 @@ const PaginationSimple = ({ page, totalPage }) => {
         <button
           rel="prev"
           className={`${
-            currentPage === 1 ? 'opacity-20  bg-gray-200  text-gray-500 pointer-events-none ' : 'block text-white bg-indigo-700'
+            currentPage === 1 ? 'opacity-20  bg-gray-200  text-gray-500 pointer-events-none ' : 'block text-black bg-white'
           } duration-200 px-3.5 py-2 hover:border-black rounded-full`} >
           <i className='fas fa-angle-left text-2xl'/>
         </button>
