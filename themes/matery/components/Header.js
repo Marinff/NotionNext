@@ -39,17 +39,20 @@ const Header = props => {
         const showNav =
           scrollS <= windowTop ||
           scrollS < 5 ||
-          (header && scrollS <= header.clientHeight * 2) 
-
+          (header && scrollS <= header.clientHeight * 2) // 非首页无大图时影藏顶部 滚动条置顶时隐藏// 非首页无大图时影藏顶部 滚动条置顶时隐藏
         // 是否将导航栏透明
-        const navTransparent = header && scrollS < 300 
+        const navTransparent = header && scrollS < 300 // 透明导航条的条件
 
         if (navTransparent) {
-          nav?.classList.replace('bg-white', 'bg-none') // 变透明
-          nav?.classList.replace('text-black', 'text-white') // 文字变白
+          nav && nav.classList.replace('bg-indigo-700', 'bg-none')
+          nav && nav.classList.replace('text-black', 'text-white')
+          nav && nav.classList.replace('shadow-xl', 'shadow-none')
+          nav && nav.classList.replace('dark:bg-hexo-black-gray', 'transparent')
         } else {
-          nav?.classList.replace('bg-none', 'bg-white') // 变回白色
-          nav?.classList.replace('text-white', 'text-black') // 文字变黑
+          nav && nav.classList.replace('bg-none', 'bg-indigo-700')
+          nav && nav.classList.replace('text-white', 'text-black')
+          nav && nav.classList.replace('shadow-none', 'shadow-xl')
+          nav && nav.classList.replace('transparent', 'dark:bg-hexo-black-gray')
         }
 
         if (!showNav) {
@@ -79,6 +82,7 @@ const Header = props => {
   // 监听滚动
   useEffect(() => {
     scrollTrigger()
+
     window.addEventListener('scroll', scrollTrigger)
     return () => {
       window.removeEventListener('scroll', scrollTrigger)
@@ -147,7 +151,7 @@ const Header = props => {
       <div
         id='sticky-nav'
         className={
-          'flex justify-center top-0 shadow-none fixed bg-white text-black dark:bg-hexo-black-gray dark:text-gray-200 w-full z-30 transform transition-all duration-200'
+          'flex justify-center top-0 shadow-none fixed bg-none dark:bg-hexo-black-gray text-gray-200 w-full z-30 transform transition-all duration-200'
         }>
         <div className='w-full max-w-6xl flex justify-between items-center px-4 py-2'>
           {/* 左侧功能 */}
