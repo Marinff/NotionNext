@@ -30,36 +30,37 @@ const Header = props => {
   const showSearchButton = siteConfig('MATERY_MENU_SEARCH', false, CONFIG)
 
   const router = useRouter()
+ // 修改滚动处理函数中的透明度判断逻辑
   const scrollTrigger = useCallback(
     throttle(() => {
       requestAnimationFrame(() => {
         const scrollS = window.scrollY
         const nav = document.querySelector('#sticky-nav')
         const header = document.querySelector('#header')
-        const showNav =
-          scrollS <= windowTop ||
-          scrollS < 5 ||
-          (header && scrollS <= header.clientHeight * 2)
-
-        // 是否将导航栏透明
-        const navTransparent = scrollS < 300 // 透明导航条的条件
-
-        if (navTransparent) {
-          nav?.classList.replace('bg-white', 'bg-none') // 变透明
-          nav?.classList.replace('text-black', 'text-white') // 文字变白
+  
+        // 更严格的透明判断条件
+        const shouldTransparent = scrollS < 5 // 当滚动距离小于5px时视为顶部
+  
+        // 清除所有可能冲突的背景类
+        nav?.classList.remove('bg-none', 'bg-white', 'dark:bg-hexo-black-gray')
+        
+        // 设置透明度相关样式
+        if (shouldTransparent) {
+          nav?.classList.add('bg-none', 'text-white')
         } else {
-          nav?.classList.replace('bg-none', 'bg-white') // 变回白色
-          nav?.classList.replace('text-white', 'text-black') // 文字变黑
+          nav?.classList.add('bg-white', 'text-black')
+          nav?.classList.remove('dark') // 确保非透明状态下移除暗黑模式类
         }
-
+  
+        // 保留原有的显隐逻辑
+        const showNav = scrollS <= windowTop || scrollS < 5
         if (!showNav) {
-          nav && nav.classList.replace('top-0', '-top-20')
+          nav?.classList.replace('top-0', '-top-20')
           windowTop = scrollS
         } else {
-          nav && nav.classList.replace('-top-20', 'top-0')
+          nav?.classList.replace('-top-20', 'top-0')
           windowTop = scrollS
         }
-        navDarkMode()
       })
     }, throttleMs)
   )
