@@ -43,7 +43,7 @@ const PaginationSimple = ({ page, totalPage }) => {
         <button
           rel="next"
           className={`${
-            +showNext ? 'text-black bg-white ' : ' opacity-20 bg-gray-200 text-gray-500 pointer-events-none '
+            +showNext ? 'text-white bg-indigo-700 ' : ' opacity-20 bg-gray-200 text-gray-500 pointer-events-none '
           } duration-200 px-4 py-2 hover:border-black rounded-full`}
         >
           <i className='fas fa-angle-right text-2xl'/>
